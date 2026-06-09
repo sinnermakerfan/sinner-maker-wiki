@@ -1,0 +1,15 @@
+{
+    "name": "Caesar",
+    "class": "Sinner Profile",
+    "creator": "Official Game Asset",
+    "description": "Data profile record file allocated for Caesar. Features unique baseline traits aligned with historical configurations.",
+    "attributes": {
+        "wrath": 0,
+        "pride": 0,
+        "greed": 0,
+        "envy": 0,
+        "gluttony": 0,
+        "sloth": 0,
+        "lust": 0
+    }
+}
