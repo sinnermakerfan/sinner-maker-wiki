@@ -3,323 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinner Maker Wiki</title>
+    <title>Sinner Maker Wiki Portal</title>
     <style>
         :root {
-            --bg-color: #ffffff;
-            --text-color: #202122;
-            --sidebar-bg: #f8f9fa;
-            --border-color: #a2a9b1;
-            --link-color: #3366cc;
-            --accent-box: #f8f9fa;
+            --bg-color: #111112;
+            --panel-color: #16161a;
+            --border-color: #2e2e36;
+            --accent-color: #e54b4b;
+            --text-color: #e3e3e6;
+            --text-muted: #8a8a93;
+            --wiki-panel: #ffffff;
+            --wiki-text: #202122;
+            --wiki-border: #a2a9b1;
         }
 
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            color: var(--text-color);
             background-color: var(--bg-color);
-            display: grid;
-            grid-template-columns: 250px 1fr;
+            color: var(--text-color);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Wiki Left Sidebar Navigation */
-        aside {
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
+        .hidden { display: none !important; }
+
+        /* ==================== 1. HOME SCREEN INTERFACE ==================== */
+        #home-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .portal-frame {
+            background-color: var(--panel-color);
+            border: 2px solid var(--border-color);
+            padding: 50px 40px;
+            max-width: 650px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .portal-frame h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            margin: 0 0 10px 0;
+            color: #fff;
+        }
+
+        .portal-divider {
+            height: 4px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 20px 0;
+        }
+
+        .portal-desc {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 35px;
+            font-size: 1.05rem;
+        }
+
+        .enter-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--accent-color);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .enter-btn:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .enter-btn:active {
+            transform: scale(0.98);
+        }
+
+        .db-status {
+            margin-top: 30px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+        }
+
+        /* ==================== 2. WIKI INTERFACE ==================== */
+        #wiki-screen {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+            background-color: var(--wiki-panel);
+            color: var(--wiki-text);
+        }
+
+        /* Wiki Sidebar */
+        .wiki-sidebar {
+            background-color: #f8f9fa;
+            border-right: 1px solid var(--wiki-border);
+            padding: 25px 20px;
             box-sizing: border-box;
         }
 
-        aside h1 {
-            font-size: 1.4rem;
+        .wiki-logo {
+            font-size: 1.25rem;
+            font-weight: bold;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--wiki-border);
             color: #000;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
+            cursor: pointer;
         }
 
-        aside h2 {
-            font-size: 0.9rem;
+        .sidebar-section-title {
+            font-size: 0.75rem;
             color: #72774d;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin: 25px 0 8px 0;
+            font-weight: bold;
         }
 
-        .wiki-menu {
+        .wiki-nav-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .wiki-menu li {
-            margin-bottom: 8px;
+        .wiki-nav-list li {
+            margin-bottom: 10px;
             font-size: 0.9rem;
         }
 
-        .wiki-menu a {
-            color: var(--link-color);
+        .wiki-nav-list a {
+            color: #3366cc;
             text-decoration: none;
             cursor: pointer;
         }
 
-        .wiki-menu a:hover {
+        .wiki-nav-list a:hover {
             text-decoration: underline;
         }
 
-        /* Main Content Wiki Styling */
-        main {
-            padding: 40px;
+        /* Wiki Main Content Area */
+        .wiki-main {
+            padding: 50px 60px;
             box-sizing: border-box;
-            max-width: 1000px;
+            max-width: 1050px;
         }
 
-        .wiki-title {
-            font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
-            font-size: 2.3rem;
-            margin-top: 0;
-            margin-bottom: 5px;
-            border-bottom: 1px solid var(--border-color);
+        .wiki-title-header {
+            border-bottom: 1px solid var(--wiki-border);
             padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .wiki-main-title {
+            font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+            font-size: 2.4rem;
+            margin: 0;
             font-weight: normal;
         }
 
-        .wiki-subtitle {
-            font-size: 0.85rem;
+        .wiki-site-sub {
+            font-size: 0.8rem;
             color: #54595d;
-            margin-bottom: 25px;
+            margin-top: 4px;
             font-style: italic;
         }
 
-        .wiki-body-layout {
+        .wiki-layout-cols {
             display: grid;
             grid-template-columns: 1fr 300px;
-            gap: 40px;
+            gap: 50px;
         }
 
-        .article-text {
+        .wiki-article-body {
             line-height: 1.6;
             font-size: 1rem;
             white-space: pre-line;
         }
 
-        /* Classic Right-Side Wiki Infobox */
-        .infobox {
-            background-color: var(--accent-box);
-            border: 1px solid var(--border-color);
-            border-radius: 2px;
+        /* Wiki Right Infobox Table */
+        .wiki-infobox {
+            background-color: #f8f9fa;
+            border: 1px solid var(--wiki-border);
             padding: 15px;
             font-size: 0.85rem;
             align-self: start;
         }
 
-        .infobox-title {
-            font-size: 1.1rem;
+        .infobox-header {
+            font-size: 1.05rem;
             font-weight: bold;
             text-align: center;
             background-color: #eaecf0;
             padding: 6px;
             margin: -15px -15px 15px -15px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--wiki-border);
         }
 
-        .infobox-image {
+        .infobox-img {
             background: #e2e2e2;
-            height: 150px;
+            height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 15px;
             border: 1px solid #ccc;
         }
 
-        .infobox table {
+        .infobox-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 15px;
         }
 
-        .infobox th {
+        .infobox-table th {
             text-align: left;
-            padding: 4px 0;
+            padding: 5px 0;
             color: #54595d;
             font-weight: bold;
             width: 40%;
             vertical-align: top;
         }
 
-        .infobox td {
-            padding: 4px 0;
+        .infobox-table td {
+            padding: 5px 0;
             vertical-align: top;
         }
 
-        .download-btn {
+        .wiki-download-btn {
             display: block;
             text-align: center;
             background-color: #3366cc;
-            color: #fff !important;
-            text-decoration: none !none;
+            color: #ffffff !important;
+            text-decoration: none !important;
             padding: 10px;
             font-weight: bold;
-            border-radius: 4px;
+            border-radius: 2px;
         }
 
-        .download-btn:hover {
+        .wiki-download-btn:hover {
             background-color: #2a52a4;
-        }
-
-        .loading-text {
-            color: #72774d;
-            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <aside>
-        <h1 onclick="loadWelcomePage()" style="cursor: pointer;">Sinner Maker Wiki</h1>
-        <h2>Navigation</h2>
-        <ul class="wiki-menu">
-            <li><a onclick="loadWelcomePage()">Main Page</a></li>
-        </ul>
-        
-        <h2 style="margin-top: 30px;">Archived Sinners</h2>
-        <ul class="wiki-menu" id="sidebar-sinner-list">
-            <li class="loading-text">Loading database...</li>
-        </ul>
-    </aside>
-
-    <main>
-        <h1 class="wiki-title" id="article-title">Sinner Maker Central Archive</h1>
-        <div class="wiki-subtitle" id="article-subtitle">From Sinner Maker Wiki, the free custom encyclopedia</div>
-
-        <div class="wiki-body-layout" id="wiki-content-area">
-            <div class="article-text" id="article-text">
-                Welcome to the official character documentation database for Sinner Maker. 
-                
-                Select an entry from the left-hand directory panel to read its design history, lore parameters, and download its save configuration assets directly into your client tool.
-            </div>
-
-            <div class="infobox" id="article-infobox">
-                <div class="infobox-title" id="info-title">Database Meta</div>
-                <div class="infobox-image">👹</div>
-                <table>
-                    <tr>
-                        <th>Status</th>
-                        <td>Online</td>
-                    </tr>
-                    <tr>
-                        <th>Host</th>
-                        <td>GitHub Pages</td>
-                    </tr>
-                </ul>
-            </div>
+    <!-- ==================== SCREEN 1: HOME PORTAL LAYER ==================== -->
+    <div id="home-screen">
+        <div class="portal-frame">
+            <h1>SINNER MAKER</h1>
+            <div style="font-family: monospace; color: var(--text-muted); font-size: 0.9rem; letter-spacing: 2px;">CORE DATABASE SYSTEM</div>
+            
+            <div class="portal-divider"></div>
+            
+            <p class="portal-desc">
+                Welcome to the central network terminal. This server acts as an encyclopedic repository for custom-compiled Sinner build data configurations, documentation logs, and character specifications.
+            </p>
+            
+            <button class="enter-btn" onclick="enterWiki()">Enter Archive</button>
+            
+            <div class="db-status" id="home-counter">Querying GitHub Node Storage...</div>
         </div>
-    </main>
+    </div>
+
+
+    <!-- ==================== SCREEN 2: MAIN WIKI PANE ==================== -->
+    <div id="wiki-screen" class="hidden">
+        
+        <!-- SIDEBAR DIRECTORY -->
+        <aside class="wiki-sidebar">
+            <div class="wiki-logo" onclick="loadMainWikiPage()">Sinner Maker Wiki</div>
+            
+            <div class="sidebar-section-title">Navigation</div>
+            <ul class="wiki-nav-list">
+                <li><a onclick="loadMainWikiPage()">Main Page</a></li>
+                <li><a onclick="exitToHome()">← Exit Archive</a></li>
+            </ul>
+            
+            <div class="sidebar-section-title">Database Records</div>
+            <ul class="wiki-nav-list" id="sidebar-links">
+                <li style="color: #72774d; font-style: italic;">Syncing...</li>
+            </ul>
+        </aside>
+
+        <!-- MAIN ENCYCLOPEDIA PANE -->
+        <main class="wiki-main">
+            <div class="wiki-title-header">
+                <h1 class="wiki-main-title" id="wiki-page-title">Sinner Maker Central Archive</h1>
+                <div class="wiki-site-sub" id="wiki-page-sub">From Sinner Maker Wiki, the free custom encyclopedia</div>
+            </div>
+
+            <div class="wiki-layout-cols">
+                <!-- Text Article -->
+                <div class="wiki-article-body" id="wiki-page-text">
+                    Select a logged record profile from the left navigation frame menu to review structural item logs, archetype lore documentation summaries, and to pull raw configuration asset strings.
+                </div>
+
+                <!-- Structural Info Side-Box -->
+                <div class="wiki-infobox" id="wiki-page-infobox">
+                    <div class="infobox-header">Database Meta</div>
+                    <div class="infobox-img">📖</div>
+                    <table class="infobox-table">
+                        <tr>
+                            <th>Node Status</th>
+                            <td>Online</td>
+                        </tr>
+                        <tr>
+                            <th>Environment</th>
+                            <td>GitHub Pages</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+    </div>
 
     <script>
-        // Set up directly to target your open repository setup
+        // System variables targeted directly to your account repo credentials
         const GITHUB_USER = "sinnermakerfan"; 
         const GITHUB_REPO = "sinner-maker-wiki"; 
 
-        // Cache file records locally so we don't have to keep re-fetching them
-        let loadedSinnersCache = {};
+        let databaseCache = {};
 
-        async function initWiki() {
-            const sidebar = document.getElementById('sidebar-sinner-list');
+        // Run data pipeline query immediately upon loading the page view
+        async function fetchDatabase() {
+            const homeCounter = document.getElementById('home-counter');
+            const sidebarLinks = document.getElementById('sidebar-links');
+            
             try {
-                // Read everything inside your github repository /sinners directory
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/sinners`);
-                if (!response.ok) throw new Error("Could not find configuration folder context.");
+                if (!response.ok) throw new Error("Folder directory missing.");
                 
                 const files = await response.json();
                 const jsonFiles = files.filter(f => f.name.endsWith('.json'));
                 
-                sidebar.innerHTML = ''; // Clear loading text
+                homeCounter.innerText = `STATUS: CONNECTED // ${jsonFiles.length} RECORDS LOADED`;
+                sidebarLinks.innerHTML = '';
 
-                if(jsonFiles.length === 0) {
-                    sidebar.innerHTML = '<li class="loading-text">No entries logged yet.</li>';
+                if (jsonFiles.length === 0) {
+                    sidebarLinks.innerHTML = '<li style="color: #72774d; font-style: italic;">No records found</li>';
                     return;
                 }
 
                 for (let file of jsonFiles) {
                     const res = await fetch(file.download_url);
                     const sinnerData = await res.json();
+                    const entryId = file.name.replace('.json', '');
                     
-                    // Save file configuration properties to our local storage variable array
-                    const safeId = file.name.replace('.json', '');
-                    loadedSinnersCache[safeId] = {
+                    // Stash information cleanly in our data structure arrays
+                    databaseCache[entryId] = {
                         data: sinnerData,
-                        downloadUrl: file.download_url
+                        url: file.download_url
                     };
 
-                    // Add custom hyperlink node into the sidebar index menu frame
+                    // Append target link element item nodes inside sidebar listings frame
                     const li = document.createElement('li');
-                    li.innerHTML = `<a onclick="displayArticle('${safeId}')">${sinnerData.name || safeId}</a>`;
-                    sidebar.appendChild(li);
+                    li.innerHTML = `<a onclick="loadArticle('${entryId}')">${sinnerData.name || entryId}</a>`;
+                    sidebarLinks.appendChild(li);
                 }
+
             } catch (err) {
-                sidebar.innerHTML = '<li style="color:red; font-size:0.8rem;">Database folder "sinners" not detected yet.</li>';
+                homeCounter.innerText = "STATUS: EMPTY STORAGE // REPO SETUP PENDING";
+                sidebarLinks.innerHTML = '<li style="color:red; font-size:0.8rem;">Create "sinners" folder inside GitHub</li>';
                 console.error(err);
             }
         }
 
-        function displayArticle(id) {
-            const sinner = loadedSinnersCache[id];
-            if (!sinner) return;
+        // Layout Swap Navigation Core Scripts
+        function enterWiki() {
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('wiki-screen').classList.remove('hidden');
+        }
 
-            // Swap out Article Content Data fields
-            document.getElementById('article-title').innerText = sinner.data.name || "Unnamed Entry";
-            document.getElementById('article-subtitle').innerText = `From Sinner Maker Wiki, the database entry for designation node "${id}"`;
-            document.getElementById('article-text').innerText = sinner.data.description || "No lore records exist for this entry.";
+        function exitToHome() {
+            document.getElementById('wiki-screen').classList.add('hidden');
+            document.getElementById('home-screen').classList.remove('hidden');
+        }
 
-            // Rebuild Right Side Wiki Meta-Infobox Table Frame
-            const infoboxArea = document.getElementById('article-infobox');
-            infoboxArea.innerHTML = `
-                <div class="infobox-title">${sinner.data.name || 'Data Manifest'}</div>
-                <div class="infobox-image">👹</div>
-                <table>
+        // Load targeted wiki profile pages smoothly
+        function loadArticle(id) {
+            const entry = databaseCache[id];
+            if (!entry) return;
+
+            document.getElementById('wiki-page-title').innerText = entry.data.name || "Unnamed Entry";
+            document.getElementById('wiki-page-sub').innerText = `From Sinner Maker Wiki, the tracking profile log for node index resource allocation string "${id}"`;
+            document.getElementById('wiki-page-text').innerText = entry.data.description || "No archival script documents mapped to this profile resource.";
+
+            document.getElementById('wiki-page-infobox').innerHTML = `
+                <div class="infobox-header">${entry.data.name || 'Data Pack'}</div>
+                <div class="infobox-img">👹</div>
+                <table class="infobox-table">
                     <tr>
                         <th>Classification</th>
-                        <td>${sinner.data.class || 'Standard'}</td>
+                        <td>${entry.data.class || 'Standard Type'}</td>
                     </tr>
                     <tr>
                         <th>Creator</th>
-                        <td>${sinner.data.creator || 'Anonymous'}</td>
+                        <td>${entry.data.creator || 'Anonymous'}</td>
                     </tr>
                 </table>
-                <a class="download-btn" href="${sinner.downloadUrl}" download>Download Data File</a>
+                <a class="wiki-download-btn" href="${entry.url}" download>Download Sinner Data</a>
             `;
         }
 
-        function loadWelcomePage() {
-            document.getElementById('article-title').innerText = "Sinner Maker Central Archive";
-            document.getElementById('article-subtitle').innerText = "From Sinner Maker Wiki, the free custom encyclopedia";
-            document.getElementById('article-text').innerText = "Welcome to the official character documentation database for Sinner Maker.\n\nSelect an entry from the left-hand directory panel to read its design history, lore parameters, and download its save configuration assets directly into your client tool.";
+        function loadMainWikiPage() {
+            document.getElementById('wiki-page-title').innerText = "Sinner Maker Central Archive";
+            document.getElementById('wiki-page-sub').innerText = "From Sinner Maker Wiki, the free custom encyclopedia";
+            document.getElementById('wiki-page-text').innerText = "Select a logged record profile from the left navigation frame menu to review structural item logs, archetype lore documentation summaries, and to pull raw configuration asset strings.";
             
-            document.getElementById('article-infobox').innerHTML = `
-                <div class="infobox-title">Database Meta</div>
-                <div class="infobox-image">📖</div>
-                <table>
+            document.getElementById('wiki-page-infobox').innerHTML = `
+                <div class="infobox-header">Database Meta</div>
+                <div class="infobox-img">📖</div>
+                <table class="infobox-table">
                     <tr>
-                        <th>Status</th>
+                        <th>Node Status</th>
                         <td>Online</td>
                     </tr>
                     <tr>
-                        <th>Host</th>
+                        <th>Environment</th>
                         <td>GitHub Pages</td>
                     </tr>
                 </table>
             `;
         }
 
-        // Boot system index scripts up instantly upon webpage context mapping loading loop
-        initWiki();
+        // Run instantly to initialize backend configurations on load loops
+        fetchDatabase();
     </script>
 </body>
 </html>
