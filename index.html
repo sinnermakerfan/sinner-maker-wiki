@@ -6,30 +6,32 @@
     <title>Sinner Maker Wiki Portal</title>
     <style>
         :root {
-            --bg-color: #111112;
-            --panel-color: #16161a;
-            --border-color: #2e2e36;
-            --accent-color: #e54b4b;
-            --text-color: #e3e3e6;
-            --text-muted: #8a8a93;
-            --wiki-panel: #ffffff;
-            --wiki-text: #202122;
-            --wiki-border: #a2a9b1;
+            /* Official Page Aesthetic Colors */
+            --bg-dark: #1a1a1c;
+            --bg-panel: #232326;
+            --bg-infobox: #2b2b2f;
+            --border-color: #3e3e44;
+            --text-light: #ffffff;
+            --text-muted: #9a9a9f;
+            --accent-red: #da2222;
+            --accent-red-hover: #b51c1c;
+            --link-blue: #5c93ff;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
         .hidden { display: none !important; }
 
-        /* ==================== 1. HOME SCREEN INTERFACE ==================== */
+        /* ==================== 1. GAME PORTAL HOME SCREEN ==================== */
         #home-screen {
             display: flex;
             flex-direction: column;
@@ -38,105 +40,96 @@
             min-height: 100vh;
             padding: 20px;
             box-sizing: border-box;
-            text-align: center;
+            background: linear-gradient(180deg, #141416 0%, var(--bg-dark) 100%);
         }
 
         .portal-frame {
-            background-color: var(--panel-color);
-            border: 2px solid var(--border-color);
-            padding: 50px 40px;
+            background-color: var(--bg-panel);
+            border: 3px solid var(--border-color);
+            padding: 40px;
             max-width: 650px;
             width: 100%;
             box-sizing: border-box;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            text-align: left;
         }
 
         .portal-frame h1 {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 2.5rem;
-            letter-spacing: 4px;
-            margin: 0 0 10px 0;
-            color: #fff;
-        }
-
-        .portal-divider {
-            height: 4px;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            margin: 20px 0;
+            font-size: 2.8rem;
+            margin: 0 0 5px 0;
+            color: var(--text-light);
+            text-transform: uppercase;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 10px;
         }
 
         .portal-desc {
             color: var(--text-muted);
             line-height: 1.6;
-            margin-bottom: 35px;
-            font-size: 1.05rem;
+            margin: 25px 0 35px 0;
+            font-size: 1rem;
         }
 
         .enter-btn {
-            background-color: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--accent-color);
+            background-color: var(--accent-red);
+            color: #fff;
+            border: none;
             padding: 15px 40px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            letter-spacing: 2px;
+            font-family: inherit;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background 0.2s;
         }
 
         .enter-btn:hover {
-            background-color: var(--accent-color);
-            color: #fff;
-        }
-
-        .enter-btn:active {
-            transform: scale(0.98);
+            background-color: var(--accent-red-hover);
         }
 
         .db-status {
-            margin-top: 30px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: var(--accent-color);
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            text-align: center;
+            letter-spacing: 1px;
         }
 
-        /* ==================== 2. WIKI INTERFACE ==================== */
+        /* ==================== 2. GAME HARDWARE WIKI INTERFACE ==================== */
         #wiki-screen {
             display: grid;
-            grid-template-columns: 260px 1fr;
+            grid-template-columns: 280px 1fr;
             min-height: 100vh;
-            background-color: var(--wiki-panel);
-            color: var(--wiki-text);
         }
 
-        /* Wiki Sidebar */
+        /* Wiki Mechanical Sidebar */
         .wiki-sidebar {
-            background-color: #f8f9fa;
-            border-right: 1px solid var(--wiki-border);
-            padding: 25px 20px;
+            background-color: var(--bg-panel);
+            border-right: 3px solid var(--border-color);
+            padding: 30px 20px;
             box-sizing: border-box;
         }
 
         .wiki-logo {
-            font-size: 1.25rem;
-            font-weight: bold;
+            font-size: 1.5rem;
+            font-weight: 900;
             margin-top: 0;
-            margin-bottom: 25px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--wiki-border);
-            color: #000;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-red);
+            color: var(--text-light);
+            text-transform: uppercase;
             cursor: pointer;
         }
 
         .sidebar-section-title {
-            font-size: 0.75rem;
-            color: #72774d;
+            font-size: 0.85rem;
+            color: var(--accent-red);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 25px 0 8px 0;
-            font-weight: bold;
+            margin: 30px 0 10px 0;
+            letter-spacing: 1px;
         }
 
         .wiki-nav-list {
@@ -146,190 +139,194 @@
         }
 
         .wiki-nav-list li {
-            margin-bottom: 10px;
-            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
         }
 
         .wiki-nav-list a {
-            color: #3366cc;
+            color: var(--text-light);
             text-decoration: none;
             cursor: pointer;
         }
 
         .wiki-nav-list a:hover {
+            color: var(--link-blue);
             text-decoration: underline;
         }
 
-        /* Wiki Main Content Area */
+        /* Wiki Main Document Panel */
         .wiki-main {
-            padding: 50px 60px;
+            padding: 50px;
             box-sizing: border-box;
-            max-width: 1050px;
+            background-color: var(--bg-dark);
         }
 
         .wiki-title-header {
-            border-bottom: 1px solid var(--wiki-border);
-            padding-bottom: 5px;
-            margin-bottom: 20px;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
         }
 
         .wiki-main-title {
-            font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
-            font-size: 2.4rem;
+            font-size: 2.5rem;
             margin: 0;
-            font-weight: normal;
+            text-transform: uppercase;
+            color: #fff;
         }
 
         .wiki-site-sub {
-            font-size: 0.8rem;
-            color: #54595d;
-            margin-top: 4px;
-            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 6px;
         }
 
         .wiki-layout-cols {
             display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 50px;
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
         }
 
         .wiki-article-body {
-            line-height: 1.6;
-            font-size: 1rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
             white-space: pre-line;
+            color: #e2e2e5;
         }
 
-        /* Wiki Right Infobox Table */
+        /* Themed Sidebar Data Frame / Infobox */
         .wiki-infobox {
-            background-color: #f8f9fa;
-            border: 1px solid var(--wiki-border);
-            padding: 15px;
-            font-size: 0.85rem;
+            background-color: var(--bg-infobox);
+            border: 2px solid var(--border-color);
+            padding: 20px;
+            font-size: 0.9rem;
             align-self: start;
         }
 
         .infobox-header {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: bold;
+            text-transform: uppercase;
             text-align: center;
-            background-color: #eaecf0;
-            padding: 6px;
-            margin: -15px -15px 15px -15px;
-            border-bottom: 1px solid var(--wiki-border);
+            background-color: var(--bg-panel);
+            padding: 8px;
+            margin: -20px -20px 20px -20px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--accent-red);
         }
 
         .infobox-img {
-            background: #e2e2e2;
-            height: 160px;
+            background: var(--bg-dark);
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4.5rem;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            border: 1px dashed var(--border-color);
         }
 
         .infobox-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .infobox-table th {
             text-align: left;
-            padding: 5px 0;
-            color: #54595d;
-            font-weight: bold;
-            width: 40%;
+            padding: 6px 0;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            width: 45%;
+            font-size: 0.8rem;
             vertical-align: top;
         }
 
         .infobox-table td {
-            padding: 5px 0;
+            padding: 6px 0;
             vertical-align: top;
+            color: #fff;
         }
 
         .wiki-download-btn {
             display: block;
             text-align: center;
-            background-color: #3366cc;
+            background-color: var(--accent-red);
             color: #ffffff !important;
             text-decoration: none !important;
-            padding: 10px;
+            padding: 12px;
             font-weight: bold;
-            border-radius: 2px;
+            text-transform: uppercase;
+            transition: background 0.2s;
         }
 
         .wiki-download-btn:hover {
-            background-color: #2a52a4;
+            background-color: var(--accent-red-hover);
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== SCREEN 1: HOME PORTAL LAYER ==================== -->
+    <!-- ==================== SCREEN 1: PORTAL HOME SCREEN ==================== -->
     <div id="home-screen">
         <div class="portal-frame">
             <h1>SINNER MAKER</h1>
-            <div style="font-family: monospace; color: var(--text-muted); font-size: 0.9rem; letter-spacing: 2px;">CORE DATABASE SYSTEM</div>
-            
-            <div class="portal-divider"></div>
+            <div style="color: var(--accent-red); font-size: 0.9rem; margin-top: 5px;">ARCHIVE & SPECIFICATION MANUAL</div>
             
             <p class="portal-desc">
-                Welcome to the central network terminal. This server acts as an encyclopedic repository for custom-compiled Sinner build data configurations, documentation logs, and character specifications.
+                Welcome to the terminal network database layer. This subsystem functions as an open-source enclyclopedic repository tracking engine configs, asset variables, and Sinner blueprints.
             </p>
             
-            <button class="enter-btn" onclick="enterWiki()">Enter Archive</button>
+            <button class="enter-btn" onclick="enterWiki()">Enter Wiki System</button>
             
-            <div class="db-status" id="home-counter">Querying GitHub Node Storage...</div>
+            <div class="db-status" id="home-counter">RETRIEVING FILES FROM SERVER REPOSITORY...</div>
         </div>
     </div>
 
 
-    <!-- ==================== SCREEN 2: MAIN WIKI PANE ==================== -->
+    <!-- ==================== SCREEN 2: MAIN INDUSTRIAL WIKI ==================== -->
     <div id="wiki-screen" class="hidden">
         
-        <!-- SIDEBAR DIRECTORY -->
+        <!-- MECHANICAL SIDEBAR -->
         <aside class="wiki-sidebar">
-            <div class="wiki-logo" onclick="loadMainWikiPage()">Sinner Maker Wiki</div>
+            <div class="wiki-logo" onclick="loadMainWikiPage()">Sinner Wiki</div>
             
-            <div class="sidebar-section-title">Navigation</div>
+            <div class="sidebar-section-title">Core Indexes</div>
             <ul class="wiki-nav-list">
-                <li><a onclick="loadMainWikiPage()">Main Page</a></li>
-                <li><a onclick="exitToHome()">← Exit Archive</a></li>
+                <li><a onclick="loadMainWikiPage()">Main Database</a></li>
+                <li><a onclick="exitToHome()">← Return to Port</a></li>
             </ul>
             
-            <div class="sidebar-section-title">Database Records</div>
+            <div class="sidebar-section-title">Archived Sinners</div>
             <ul class="wiki-nav-list" id="sidebar-links">
-                <li style="color: #72774d; font-style: italic;">Syncing...</li>
+                <li style="color: var(--text-muted); font-style: italic;">Syncing arrays...</li>
             </ul>
         </aside>
 
-        <!-- MAIN ENCYCLOPEDIA PANE -->
+        <!-- DATA RECORD SHEET PANE -->
         <main class="wiki-main">
             <div class="wiki-title-header">
                 <h1 class="wiki-main-title" id="wiki-page-title">Sinner Maker Central Archive</h1>
-                <div class="wiki-site-sub" id="wiki-page-sub">From Sinner Maker Wiki, the free custom encyclopedia</div>
+                <div class="wiki-site-sub" id="wiki-page-sub">Sinner Maker Wiki // Open Documentation Repository Layout</div>
             </div>
 
             <div class="wiki-layout-cols">
-                <!-- Text Article -->
+                <!-- Main Description Column -->
                 <div class="wiki-article-body" id="wiki-page-text">
-                    Select a logged record profile from the left navigation frame menu to review structural item logs, archetype lore documentation summaries, and to pull raw configuration asset strings.
+                    Select a logged entity record profile from the left industrial directory manifest map matrix array to read structural item logs, custom behavioral parameters, and extract active character file blocks.
                 </div>
 
-                <!-- Structural Info Side-Box -->
+                <!-- Right Variable Specification Box -->
                 <div class="wiki-infobox" id="wiki-page-infobox">
-                    <div class="infobox-header">Database Meta</div>
-                    <div class="infobox-img">📖</div>
+                    <div class="infobox-header">System Info</div>
+                    <div class="infobox-img">💾</div>
                     <table class="infobox-table">
                         <tr>
-                            <th>Node Status</th>
-                            <td>Online</td>
+                            <th>Database Status</th>
+                            <td>ONLINE</td>
                         </tr>
                         <tr>
-                            <th>Environment</th>
-                            <td>GitHub Pages</td>
+                            <th>Host Engine</th>
+                            <td>GITHUB PAGES</td>
                         </tr>
                     </table>
                 </div>
@@ -339,29 +336,28 @@
     </div>
 
     <script>
-        // System variables targeted directly to your account repo credentials
+        // Directly mapped variables synced to your repository profile settings
         const GITHUB_USER = "sinnermakerfan"; 
         const GITHUB_REPO = "sinner-maker-wiki"; 
 
         let databaseCache = {};
 
-        // Run data pipeline query immediately upon loading the page view
         async function fetchDatabase() {
             const homeCounter = document.getElementById('home-counter');
             const sidebarLinks = document.getElementById('sidebar-links');
             
             try {
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/sinners`);
-                if (!response.ok) throw new Error("Folder directory missing.");
+                if (!response.ok) throw new Error("Folder directory path invalid.");
                 
                 const files = await response.json();
                 const jsonFiles = files.filter(f => f.name.endsWith('.json'));
                 
-                homeCounter.innerText = `STATUS: CONNECTED // ${jsonFiles.length} RECORDS LOADED`;
+                homeCounter.innerText = `DATABASE READY // ${jsonFiles.length} REGISTERS MOUNTED`;
                 sidebarLinks.innerHTML = '';
 
                 if (jsonFiles.length === 0) {
-                    sidebarLinks.innerHTML = '<li style="color: #72774d; font-style: italic;">No records found</li>';
+                    sidebarLinks.innerHTML = '<li style="color: var(--text-muted); font-style: italic;">Empty database tree</li>';
                     return;
                 }
 
@@ -370,26 +366,23 @@
                     const sinnerData = await res.json();
                     const entryId = file.name.replace('.json', '');
                     
-                    // Stash information cleanly in our data structure arrays
                     databaseCache[entryId] = {
                         data: sinnerData,
                         url: file.download_url
                     };
 
-                    // Append target link element item nodes inside sidebar listings frame
                     const li = document.createElement('li');
                     li.innerHTML = `<a onclick="loadArticle('${entryId}')">${sinnerData.name || entryId}</a>`;
                     sidebarLinks.appendChild(li);
                 }
 
             } catch (err) {
-                homeCounter.innerText = "STATUS: EMPTY STORAGE // REPO SETUP PENDING";
-                sidebarLinks.innerHTML = '<li style="color:red; font-size:0.8rem;">Create "sinners" folder inside GitHub</li>';
+                homeCounter.innerText = "DATABASE ERROR // NO COMPATIBLE SINNERS FOLDER LOCATED";
+                sidebarLinks.innerHTML = '<li style="color:var(--accent-red); font-size:0.8rem;">Pending deployment folder...</li>';
                 console.error(err);
             }
         }
 
-        // Layout Swap Navigation Core Scripts
         function enterWiki() {
             document.getElementById('home-screen').classList.add('hidden');
             document.getElementById('wiki-screen').classList.remove('hidden');
@@ -400,54 +393,52 @@
             document.getElementById('home-screen').classList.remove('hidden');
         }
 
-        // Load targeted wiki profile pages smoothly
         function loadArticle(id) {
             const entry = databaseCache[id];
             if (!entry) return;
 
-            document.getElementById('wiki-page-title').innerText = entry.data.name || "Unnamed Entry";
-            document.getElementById('wiki-page-sub').innerText = `From Sinner Maker Wiki, the tracking profile log for node index resource allocation string "${id}"`;
-            document.getElementById('wiki-page-text').innerText = entry.data.description || "No archival script documents mapped to this profile resource.";
+            document.getElementById('wiki-page-title').innerText = entry.data.name || "UNNAMED OBJECT";
+            document.getElementById('wiki-page-sub').innerText = `Sinner Maker Wiki // Data record specifications tracking code target "${id}.json"`;
+            document.getElementById('wiki-page-text').innerText = entry.data.description || "No supplemental descriptive documentation string registered.";
 
             document.getElementById('wiki-page-infobox').innerHTML = `
-                <div class="infobox-header">${entry.data.name || 'Data Pack'}</div>
+                <div class="infobox-header">${entry.data.name || 'Data Manifest'}</div>
                 <div class="infobox-img">👹</div>
                 <table class="infobox-table">
                     <tr>
-                        <th>Classification</th>
-                        <td>${entry.data.class || 'Standard Type'}</td>
+                        <th>Class Type</th>
+                        <td>${entry.data.class || 'UNCLASSIFIED'}</td>
                     </tr>
                     <tr>
-                        <th>Creator</th>
-                        <td>${entry.data.creator || 'Anonymous'}</td>
+                        <th>Compiler</th>
+                        <td>${entry.data.creator || 'ANONYMOUS'}</td>
                     </tr>
                 </table>
-                <a class="wiki-download-btn" href="${entry.url}" download>Download Sinner Data</a>
+                <a class="wiki-download-btn" href="${entry.url}" download>Get Config File</a>
             `;
         }
 
         function loadMainWikiPage() {
             document.getElementById('wiki-page-title').innerText = "Sinner Maker Central Archive";
-            document.getElementById('wiki-page-sub').innerText = "From Sinner Maker Wiki, the free custom encyclopedia";
-            document.getElementById('wiki-page-text').innerText = "Select a logged record profile from the left navigation frame menu to review structural item logs, archetype lore documentation summaries, and to pull raw configuration asset strings.";
+            document.getElementById('wiki-page-sub').innerText = "Sinner Maker Wiki // Open Documentation Repository Layout";
+            document.getElementById('wiki-page-text').innerText = "Select a logged entity record profile from the left industrial directory manifest map matrix array to read structural item logs, custom behavioral parameters, and extract active character file blocks.";
             
             document.getElementById('wiki-page-infobox').innerHTML = `
-                <div class="infobox-header">Database Meta</div>
-                <div class="infobox-img">📖</div>
+                <div class="infobox-header">System Info</div>
+                <div class="infobox-img">💾</div>
                 <table class="infobox-table">
                     <tr>
-                        <th>Node Status</th>
-                        <td>Online</td>
+                        <th>Database Status</th>
+                        <td>ONLINE</td>
                     </tr>
                     <tr>
-                        <th>Environment</th>
-                        <td>GitHub Pages</td>
+                        <th>Host Engine</th>
+                        <td>GITHUB PAGES</td>
                     </tr>
                 </table>
             `;
         }
 
-        // Run instantly to initialize backend configurations on load loops
         fetchDatabase();
     </script>
 </body>
