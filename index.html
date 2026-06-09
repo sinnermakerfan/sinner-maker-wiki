@@ -3,381 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SinnerShare // Sinner Maker Library</title>
+    <title>Sinner Maker Wiki</title>
     <style>
         :root {
-            --bg-main: #fbf6ec;
-            --bg-container: #ffffff;
-            --accent-orange: #ff9f43;
-            --accent-orange-hover: #ee8f32;
-            --text-dark: #4a4a4a;
-            --text-muted: #8e8e93;
-            --border-light: #f0e6d2;
+            --bg-color: #ffffff;
+            --text-color: #202122;
+            --sidebar-bg: #f8f9fa;
+            --border-color: #a2a9b1;
+            --link-color: #3366cc;
+            --accent-box: #f8f9fa;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-dark);
+            font-family: sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        /* Top Bar Navigation mirroring TomodachiShare */
-        .navbar {
-            background-color: var(--bg-container);
-            border-bottom: 2px solid var(--border-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 40px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent-orange);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            background-color: var(--accent-orange);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: inherit;
-            transition: background 0.2s, transform 0.1s;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-orange-hover);
-        }
-        
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-dark);
-            border: 2px solid var(--border-light);
-        }
-        .btn-secondary:hover {
-            background-color: #f7f0e3;
-        }
-
-        /* Main Grid Wrapper */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .view-title {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        /* TomodachiShare-style Rounded Grid Layout */
-        .sinner-grid {
+            color: var(--text-color);
+            background-color: var(--bg-color);
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 25px;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
         }
 
-        .sinner-card {
-            background: var(--bg-container);
-            border: 2px solid var(--border-light);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sinner-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(238, 143, 50, 0.1);
-            border-color: var(--accent-orange);
-        }
-
-        .card-image-placeholder {
-            background-color: #f3edd8;
-            height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .card-info {
+        /* Wiki Left Sidebar Navigation */
+        aside {
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            box-sizing: border-box;
         }
 
-        .card-name {
-            font-size: 1.25rem;
-            font-weight: 700;
+        aside h1 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #000;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        aside h2 {
+            font-size: 0.9rem;
+            color: #72774d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .wiki-menu {
+            list-style: none;
+            padding: 0;
             margin: 0;
         }
 
-        .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+        .wiki-menu li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
         }
 
-        .tag {
-            background-color: #fff2e6;
-            color: var(--accent-orange);
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-weight: 600;
+        .wiki-menu a {
+            color: var(--link-color);
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .card-creator {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 5px;
+        .wiki-menu a:hover {
+            text-decoration: underline;
         }
 
-        /* Single Detail Page Layout */
-        .detail-layout {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 40px;
-            background: var(--bg-container);
-            border: 2px solid var(--border-light);
-            border-radius: 32px;
+        /* Main Content Wiki Styling */
+        main {
             padding: 40px;
+            box-sizing: border-box;
+            max-width: 1000px;
         }
 
-        .detail-left img-box {
-            background-color: #f3edd8;
-            border-radius: 24px;
-            height: 320px;
+        .wiki-title {
+            font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+            font-size: 2.3rem;
+            margin-top: 0;
+            margin-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            font-weight: normal;
+        }
+
+        .wiki-subtitle {
+            font-size: 0.85rem;
+            color: #54595d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .wiki-body-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+
+        .article-text {
+            line-height: 1.6;
+            font-size: 1rem;
+            white-space: pre-line;
+        }
+
+        /* Classic Right-Side Wiki Infobox */
+        .infobox {
+            background-color: var(--accent-box);
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            padding: 15px;
+            font-size: 0.85rem;
+            align-self: start;
+        }
+
+        .infobox-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            background-color: #eaecf0;
+            padding: 6px;
+            margin: -15px -15px 15px -15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .infobox-image {
+            background: #e2e2e2;
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
-            margin-bottom: 20px;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
         }
 
-        /* Submit Form Layout */
-        .form-layout {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg-container);
-            border: 2px solid var(--border-light);
-            border-radius: 32px;
-            padding: 40px;
-        }
-
-        label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        input, textarea {
+        .infobox table {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--border-light);
-            border-radius: 14px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            font-family: inherit;
-            font-size: 1rem;
-            outline: none;
+            border-collapse: collapse;
+            margin-bottom: 15px;
         }
 
-        input:focus, textarea:focus {
-            border-color: var(--accent-orange);
+        .infobox th {
+            text-align: left;
+            padding: 4px 0;
+            color: #54595d;
+            font-weight: bold;
+            width: 40%;
+            vertical-align: top;
         }
 
-        .hidden { display: none !important; }
+        .infobox td {
+            padding: 4px 0;
+            vertical-align: top;
+        }
+
+        .download-btn {
+            display: block;
+            text-align: center;
+            background-color: #3366cc;
+            color: #fff !important;
+            text-decoration: none !none;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .download-btn:hover {
+            background-color: #2a52a4;
+        }
+
+        .loading-text {
+            color: #72774d;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navbar Layout matching TomodachiShare top header row -->
-    <nav class="navbar">
-        <div class="logo" onclick="showDirectory()">👥 SinnerShare</div>
-        <div class="nav-buttons">
-            <button class="btn-secondary btn" onclick="showDirectory()">Browse</button>
-            <button class="btn" onclick="showSubmitPage()">Submit Sinner</button>
-        </div>
-    </nav>
-
-    <div class="container">
+    <aside>
+        <h1 onclick="loadWelcomePage()" style="cursor: pointer;">Sinner Maker Wiki</h1>
+        <h2>Navigation</h2>
+        <ul class="wiki-menu">
+            <li><a onclick="loadWelcomePage()">Main Page</a></li>
+        </ul>
         
-        <!-- VIEW 1: MAIN GALLERY VIEW -->
-        <div id="directory-view">
-            <div class="view-title" id="counter-text">Discover and Share Sinners</div>
-            <div class="sinner-grid" id="sinners-list">
-                <!-- Javascript builds cards here -->
-            </div>
-        </div>
+        <h2 style="margin-top: 30px;">Archived Sinners</h2>
+        <ul class="wiki-menu" id="sidebar-sinner-list">
+            <li class="loading-text">Loading database...</li>
+        </ul>
+    </aside>
 
-        <!-- VIEW 2: SINGLE PROFILE DETAIL VIEW -->
-        <div id="detail-view" class="hidden">
-            <button class="btn btn-secondary" onclick="showDirectory()" style="margin-bottom: 30px;">← Back to Gallery</button>
-            <div class="detail-layout">
-                <div class="detail-left">
-                    <div style="background-color: #f3edd8; border-radius: 24px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 6rem; margin-bottom: 20px;">👹</div>
-                    <a id="wiki-download-btn" href="#" download><button class="btn" style="width: 100%; padding: 15px;">Download Sinner File</button></a>
-                </div>
-                <div class="detail-right">
-                    <h1 id="wiki-title" style="margin: 0 0 10px 0; font-size: 2.5rem;">Sinner Name</h1>
-                    <div class="tag-row" id="wiki-tags" style="margin-bottom: 20px;"></div>
-                    <p style="font-size: 1.1rem; color: var(--text-muted);">Uploaded by: <strong id="wiki-creator" style="color: var(--text-dark);"></strong></p>
-                    <hr style="border: 0; border-top: 2px solid var(--border-light); margin: 20px 0;">
-                    <h3>Lore & Documentation</h3>
-                    <p id="wiki-description" style="line-height: 1.6; font-size: 1.1rem; white-space: pre-line;"></p>
-                </div>
-            </div>
-        </div>
+    <main>
+        <h1 class="wiki-title" id="article-title">Sinner Maker Central Archive</h1>
+        <div class="wiki-subtitle" id="article-subtitle">From Sinner Maker Wiki, the free custom encyclopedia</div>
 
-        <!-- VIEW 3: UPLOAD SUBMISSION INSTRUCTIONS -->
-        <div id="submit-view" class="hidden">
-            <button class="btn btn-secondary" onclick="showDirectory()" style="margin-bottom: 30px;">← Cancel</button>
-            <div class="form-layout">
-                <h2 style="margin-top:0;">Submit your Sinner</h2>
-                <p style="color: var(--text-muted); margin-bottom: 30px;">Fill out the details below to generate a submission configuration file layout for our open-source database wrapper.</p>
+        <div class="wiki-body-layout" id="wiki-content-area">
+            <div class="article-text" id="article-text">
+                Welcome to the official character documentation database for Sinner Maker. 
                 
-                <label for="form-name">Sinner Name</label>
-                <input type="text" id="form-name" placeholder="Type your Sinner's name...">
+                Select an entry from the left-hand directory panel to read its design history, lore parameters, and download its save configuration assets directly into your client tool.
+            </div>
 
-                <label for="form-class">Classification Tag</label>
-                <input type="text" id="form-class" placeholder="e.g. Boss, Humanoid, Custom">
-
-                <label for="form-creator">Creator Handle</label>
-                <input type="text" id="form-creator" placeholder="Your developer handle...">
-
-                <label for="form-desc">Lore / Characteristics Description</label>
-                <textarea id="form-desc" rows="4" placeholder="Write history or stats config guidelines..."></textarea>
-
-                <label for="form-file">Raw JSON File String Content</label>
-                <textarea id="form-file" rows="5" placeholder="Open your exported Sinner file, copy everything inside, and paste it here..."></textarea>
-
-                <button class="btn" style="width:100%; padding: 14px;" onclick="generateGitHubIssue()">Launch GitHub Upload Request</button>
+            <div class="infobox" id="article-infobox">
+                <div class="infobox-title" id="info-title">Database Meta</div>
+                <div class="infobox-image">👹</div>
+                <table>
+                    <tr>
+                        <th>Status</th>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <th>Host</th>
+                        <td>GitHub Pages</td>
+                    </tr>
+                </ul>
             </div>
         </div>
-
-    </div>
+    </main>
 
     <script>
-        // Target paths locked specifically to your handle and project setup
+        // Set up directly to target your open repository setup
         const GITHUB_USER = "sinnermakerfan"; 
         const GITHUB_REPO = "sinner-maker-wiki"; 
 
-        async function loadSinners() {
-            const listContainer = document.getElementById('sinners-list');
+        // Cache file records locally so we don't have to keep re-fetching them
+        let loadedSinnersCache = {};
+
+        async function initWiki() {
+            const sidebar = document.getElementById('sidebar-sinner-list');
             try {
+                // Read everything inside your github repository /sinners directory
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/sinners`);
-                if (!response.ok) throw new Error("Could not find database records folder context.");
+                if (!response.ok) throw new Error("Could not find configuration folder context.");
                 
                 const files = await response.json();
                 const jsonFiles = files.filter(f => f.name.endsWith('.json'));
                 
-                document.getElementById('counter-text').innerText = `${jsonFiles.length} Sinners Registered in Archive`;
-                listContainer.innerHTML = '';
+                sidebar.innerHTML = ''; // Clear loading text
+
+                if(jsonFiles.length === 0) {
+                    sidebar.innerHTML = '<li class="loading-text">No entries logged yet.</li>';
+                    return;
+                }
 
                 for (let file of jsonFiles) {
                     const res = await fetch(file.download_url);
                     const sinnerData = await res.json();
                     
-                    const card = document.createElement('div');
-                    card.className = 'sinner-card';
-                    card.onclick = () => showWikiPage(sinnerData, file.download_url);
-                    card.innerHTML = `
-                        <div class="card-image-placeholder">👹</div>
-                        <div class="card-info">
-                            <h3 class="card-name">${sinnerData.name || file.name.replace('.json','')}</h3>
-                            <div class="tag-row">
-                                <span class="tag">${sinnerData.class || 'Sinner'}</span>
-                            </div>
-                            <div class="card-creator">By ${sinnerData.creator || 'Anonymous'}</div>
-                        </div>
-                    `;
-                    listContainer.appendChild(card);
+                    // Save file configuration properties to our local storage variable array
+                    const safeId = file.name.replace('.json', '');
+                    loadedSinnersCache[safeId] = {
+                        data: sinnerData,
+                        downloadUrl: file.download_url
+                    };
+
+                    // Add custom hyperlink node into the sidebar index menu frame
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a onclick="displayArticle('${safeId}')">${sinnerData.name || safeId}</a>`;
+                    sidebar.appendChild(li);
                 }
             } catch (err) {
-                listContainer.innerHTML = `<p style="color:var(--accent-orange); font-weight:bold;">Waiting for configuration syncing or folder data entry setup elements.</p>`;
+                sidebar.innerHTML = '<li style="color:red; font-size:0.8rem;">Database folder "sinners" not detected yet.</li>';
                 console.error(err);
             }
         }
 
-        function showWikiPage(data, rawUrl) {
-            document.getElementById('wiki-title').innerText = data.name || "Unnamed";
-            document.getElementById('wiki-creator').innerText = data.creator || "Anonymous";
-            document.getElementById('wiki-description').innerText = data.description || "No documentation logs found.";
-            document.getElementById('wiki-download-btn').href = rawUrl;
+        function displayArticle(id) {
+            const sinner = loadedSinnersCache[id];
+            if (!sinner) return;
+
+            // Swap out Article Content Data fields
+            document.getElementById('article-title').innerText = sinner.data.name || "Unnamed Entry";
+            document.getElementById('article-subtitle').innerText = `From Sinner Maker Wiki, the database entry for designation node "${id}"`;
+            document.getElementById('article-text').innerText = sinner.data.description || "No lore records exist for this entry.";
+
+            // Rebuild Right Side Wiki Meta-Infobox Table Frame
+            const infoboxArea = document.getElementById('article-infobox');
+            infoboxArea.innerHTML = `
+                <div class="infobox-title">${sinner.data.name || 'Data Manifest'}</div>
+                <div class="infobox-image">👹</div>
+                <table>
+                    <tr>
+                        <th>Classification</th>
+                        <td>${sinner.data.class || 'Standard'}</td>
+                    </tr>
+                    <tr>
+                        <th>Creator</th>
+                        <td>${sinner.data.creator || 'Anonymous'}</td>
+                    </tr>
+                </table>
+                <a class="download-btn" href="${sinner.downloadUrl}" download>Download Data File</a>
+            `;
+        }
+
+        function loadWelcomePage() {
+            document.getElementById('article-title').innerText = "Sinner Maker Central Archive";
+            document.getElementById('article-subtitle').innerText = "From Sinner Maker Wiki, the free custom encyclopedia";
+            document.getElementById('article-text').innerText = "Welcome to the official character documentation database for Sinner Maker.\n\nSelect an entry from the left-hand directory panel to read its design history, lore parameters, and download its save configuration assets directly into your client tool.";
             
-            const tagsBox = document.getElementById('wiki-tags');
-            tagsBox.innerHTML = `<span class="tag" style="font-size:1rem; padding: 6px 14px;">${data.class || 'Standard Type'}</span>`;
-
-            switchView('detail-view');
+            document.getElementById('article-infobox').innerHTML = `
+                <div class="infobox-title">Database Meta</div>
+                <div class="infobox-image">📖</div>
+                <table>
+                    <tr>
+                        <th>Status</th>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <th>Host</th>
+                        <td>GitHub Pages</td>
+                    </tr>
+                </table>
+            `;
         }
 
-        function generateGitHubIssue() {
-            const name = document.getElementById('form-name').value;
-            const className = document.getElementById('form-class').value;
-            const creator = document.getElementById('form-creator').value;
-            const desc = document.getElementById('form-desc').value;
-            const fileContent = document.getElementById('form-file').value;
-
-            if(!name || !className || !fileContent) {
-                alert("Please fill out Name, Classification, and File content box parameters.");
-                return;
-            }
-
-            const jsonStructure = {
-                name: name,
-                class: className,
-                creator: creator || "Anonymous",
-                description: desc,
-                fileDataString: fileContent
-            };
-
-            const title = encodeURIComponent(`Add Sinner: ${name}`);
-            const body = encodeURIComponent(`### Sinner Submission File Request\n\nPlease copy the block structure below into a new file inside \`sinners/${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}.json\`:\n\n\`\`\`json\n${JSON.stringify(jsonStructure, null, 2)}\n\`\`\``);
-
-            // Directly directs user to file issue submission on your repository
-            window.open(`https://github.com/${GITHUB_USER}/${GITHUB_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
-        }
-
-        function switchView(viewId) {
-            document.getElementById('directory-view').classList.add('hidden');
-            document.getElementById('detail-view').classList.add('hidden');
-            document.getElementById('submit-view').classList.add('hidden');
-            document.getElementById(viewId).classList.remove('hidden');
-        }
-
-        function showDirectory() { switchView('directory-view'); loadSinners(); }
-        function showSubmitPage() { switchView('submit-view'); }
-
-        loadSinners();
+        // Boot system index scripts up instantly upon webpage context mapping loading loop
+        initWiki();
     </script>
 </body>
 </html>
